@@ -1,6 +1,7 @@
 package edu.pdx.cs410J.AlexJacobDylan;
 
 import edu.pdx.cs410J.InvokeMainTestCase;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -71,6 +72,7 @@ class FooBarQixIT extends InvokeMainTestCase {
     assertThat(result.getTextWrittenToStandardOut(), equalTo("Foo"));
   }
 
+  @Disabled("Not sure about correct behavior ")
   @Test
   void compute10AsBar() {
     InvokeMainTestCase.MainMethodResult result = invokeMain(FooBarQix.class, "10");
@@ -111,5 +113,29 @@ class FooBarQixIT extends InvokeMainTestCase {
   void compute53AsBarFoo() {
     InvokeMainTestCase.MainMethodResult result = invokeMain(FooBarQix.class, "53");
     assertThat(result.getTextWrittenToStandardOut(), equalTo("BarFoo"));
+  }
+
+  @Test
+  void compute101As1Star1() {
+    InvokeMainTestCase.MainMethodResult result = invokeMain(FooBarQix.class, "101");
+    assertThat(result.getTextWrittenToStandardOut(), equalTo("1*1"));
+  }
+
+  @Test
+  void compute303AsFooFooStarFoo() {
+    InvokeMainTestCase.MainMethodResult result = invokeMain(FooBarQix.class, "303");
+    assertThat(result.getTextWrittenToStandardOut(), equalTo("FooFoo*Foo"));
+  }
+
+  @Test
+  void compute105AsFooBarQixStarBar() {
+    InvokeMainTestCase.MainMethodResult result = invokeMain(FooBarQix.class, "105");
+    assertThat(result.getTextWrittenToStandardOut(), equalTo("FooBarQix*Bar"));
+  }
+
+  @Test
+  void compute10101AsFooQixStarStar() {
+    InvokeMainTestCase.MainMethodResult result = invokeMain(FooBarQix.class, "10101");
+    assertThat(result.getTextWrittenToStandardOut(), equalTo("FooQix**"));
   }
 }

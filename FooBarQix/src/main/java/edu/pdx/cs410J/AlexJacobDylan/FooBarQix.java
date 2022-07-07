@@ -29,28 +29,50 @@ public class FooBarQix {
    */
   public static String compute(String arg) {
     String ret = "";
+    boolean startedReplacing = false;
     try {
       int i = Integer.parseInt(arg);
       if (i % 3 == 0) {
         ret += "Foo";
+        startedReplacing = true;
       }
       if (i % 5 == 0) {
         ret += "Bar";
+        startedReplacing = true;
       }
       if (i % 7 == 0) {
         ret += "Qix";
+        startedReplacing = true;
       }
-      for (i=0; i < arg.length(); i++){
-        switch(arg.charAt(i)){
+      for (i = 0; i < arg.length(); i++) {
+        switch (arg.charAt(i)) {
           case '3':
             ret += "Foo";
+            startedReplacing = true;
             break;
           case '5':
             ret += "Bar";
+            startedReplacing = true;
             break;
           case '7':
             ret += "Qix";
+            startedReplacing = true;
             break;
+          case '0':
+            if(!startedReplacing ){
+              arg = arg.substring(0, i) + '*' + arg.substring(i+ 1);
+            }
+            else{
+              ret += "*";
+            }
+            break;
+        }
+      }
+      if ( ! startedReplacing ){
+        for (i = 0; i < arg.length(); i++) {
+          if (arg.charAt(i) == '0') {
+            arg = arg.substring(0, i) + '*' + arg.substring(i+ 1);
+          }
         }
       }
     } catch (NumberFormatException ex) {
